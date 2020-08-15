@@ -24,8 +24,8 @@ export class ShoppingService {
       }
 
       updateIngredient(name: string, amount: number, index: number) {
-        const updateIngredient = new Ingredient(name, amount)
-        this.ingredients.splice(index, 1, updateIngredient);
-        console.log(updateIngredient)
+        const updatedIngredient = new Ingredient(name, amount)
+        this.ingredients[index] = updatedIngredient;              //HOW BRILLIANT!
+        this.ingredientChanged.next(this.ingredients.slice())
       }
 }

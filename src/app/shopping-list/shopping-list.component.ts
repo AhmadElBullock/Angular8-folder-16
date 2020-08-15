@@ -27,7 +27,6 @@ export class ShoppingListComponent implements OnInit {
   } */
 
   onEditShoppingItem(index: number) {
-    console.log(index)
     this.shoppingService.itemSelected.next(index);
   }
 

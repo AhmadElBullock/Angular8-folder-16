@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingService } from '../shopping.service';
 import { NgForm } from '@angular/forms';
@@ -13,6 +13,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   //@ViewChild('nameInput', {static: false}) nameInputRef: ElementRef;
   //@ViewChild('amountInput', {static: false}) amountInputRef: ElementRef;
   //@Output() newIngredient = new EventEmitter<Ingredient>();
+  @ViewChild('f', {static: false}) slForm: NgForm;
   selectedItem: Ingredient;
   subscription: Subscription
 
@@ -22,7 +23,12 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.subscription = this.shoppingService.itemSelected.subscribe(
       (index) => {
         this.selectedItem = this.shoppingService.editIngredient(index);
-        console.log(this.selectedItem)
+        console.log(this.selectedItem);
+        this.slForm.setValue({
+          name: this.selectedItem.name,
+          amount: this.selectedItem.amount
+        }
+       );
       }
     )
   }

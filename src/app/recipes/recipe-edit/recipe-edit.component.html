@@ -1,34 +1,47 @@
 <form *ngIf="editMode">
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <button class="btn btn-success">Save</button>
+        <button class="btn btn-danger">Cancel</button>
+      </div>
+    </div>
+
     <div class="form-group">
       <label>Edit recipe name</label>
       <input type="text" class="form-control" [value]="recipe.name">
-
     </div>
+
     <div class="form-group">
       <label>Edit recipe description</label>
       <input type="text" class="form-control" [value]="recipe.description">
     </div>
-    
+
     <div class="form-group">
       <label>Edit recipe image</label>
       <input type="text" class="form-control" [value]="recipe.imagePath" [(ngModel)]="recipe.imagePath" name=thisImagePath>
-      <label>Preview</label><br>
+      <label class="mt-2">Preview</label><br>
         <img class="img-thumbnail" [src]="recipe.imagePath" width="30%">
     </div>
-    
+
     <div class="form-group">
       <label>Edit recipe ingredients</label>
       <div class="form-row" *ngFor="let ingredient of recipe.ingredients">
-        <div class="col-7">
+        <div class="col-7 mb-1">
           <input type="text" class="form-control" [value]="ingredient.name">
         </div>
         <div class="col">
           <input type="number" class="form-control" [value]="ingredient.amount">
         </div>
-    </div></div>
+        <div class="col">
+          <button class="btn btn-danger">X</button>
+        </div>
+      </div>
+    </div>
     <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
 </form>
 
+<!-- NEW MODE -->
 <form *ngIf="!editMode">
     <div class="form-group">
       <label>Define Recipe name</label>
@@ -38,14 +51,14 @@
       <label>Add a description</label>
       <input type="text" class="form-control" #description required>
     </div>
-    
+
     <div class="form-group">
       <label>Add recipe image</label>
       <input type="text" class="form-control" placeholder="Please add image url here" value="imgPath" [(ngModel)]="imgPath" #imagePath name=thisImagePath required>
       <label>Preview</label><br>
         <img *ngIf="imgPath" class="img-thumbnail" [src]="imgPath" width="30%">
     </div>
-    
+
     <div class="form-group">
 
       <label>Define recipe ingredients</label>

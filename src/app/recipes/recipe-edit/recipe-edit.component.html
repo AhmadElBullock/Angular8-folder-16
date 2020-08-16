@@ -1,44 +1,45 @@
-<form *ngIf="editMode">
+<form *ngIf="editMode" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
 
     <div class="row mb-3">
       <div class="col-12">
-        <button class="btn btn-success">Save</button>
-        <button class="btn btn-danger">Cancel</button>
+        <button class="btn btn-success" type="button" (click)="test()">Save</button>
+        <button class="btn btn-danger" type="button">Cancel</button>
       </div>
     </div>
 
     <div class="form-group">
       <label>Edit recipe name</label>
-      <input type="text" class="form-control" [value]="recipe.name">
+      <input type="text" class="form-control" [value]="recipe.name" formControlName="name">
     </div>
 
     <div class="form-group">
       <label>Edit recipe description</label>
-      <input type="text" class="form-control" [value]="recipe.description">
+      <input type="text" class="form-control" [value]="recipe.description" formControlName="description">
     </div>
 
     <div class="form-group">
       <label>Edit recipe image</label>
-      <input type="text" class="form-control" [value]="recipe.imagePath" [(ngModel)]="recipe.imagePath" name=thisImagePath>
+      <input type="text" class="form-control" [value]="recipe.imagePath" [(ngModel)]="recipe.imagePath" name=thisImagePath formControlName="imagePath">
       <label class="mt-2">Preview</label><br>
         <img class="img-thumbnail" [src]="recipe.imagePath" width="30%">
     </div>
 
-    <div class="form-group">
+    <div class="form-group" formArrayName="ingredients">
       <label>Edit recipe ingredients</label>
-      <div class="form-row" *ngFor="let ingredient of recipe.ingredients">
+      <div class="form-row"
+      *ngFor="let ingredient of recipe.ingredients; let i = index"
+      formGroupName="ix">
         <div class="col-7 mb-1">
-          <input type="text" class="form-control" [value]="ingredient.name">
+          <input type="text" class="form-control" [value]="ingredient.name" formControlName="name">
         </div>
         <div class="col">
-          <input type="number" class="form-control" [value]="ingredient.amount">
+          <input type="number" class="form-control" [value]="ingredient.amount" formControlName="amount">
         </div>
         <div class="col">
-          <button class="btn btn-danger">X</button>
+          <button class="btn btn-danger" (click)="cc(i)">X</button>
         </div>
       </div>
     </div>
-    <button type="submit" (click)="onSubmit()" class="btn btn-primary">Submit</button>
 </form>
 
 <!-- NEW MODE -->

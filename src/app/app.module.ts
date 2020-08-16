@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -34,8 +34,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
-      {path: '', redirectTo: '/recipes', pathMatch: 'full'}, 
+      {path: '', redirectTo: '/recipes', pathMatch: 'full'},
       {path: 'recipes', component: RecipesComponent, children:[
         {path: '', component: RecipeDetailStartComponent},
         {path: 'new', component: RecipeEditComponent},
